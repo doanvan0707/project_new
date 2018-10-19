@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Category;
 
 class CategoryController extends Controller
 {
@@ -14,7 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::orderBy('id', 'desc')->where('parent_id', 0)->paginate(5);
+        return view('backend.categories.index', compact('categories'));
     }
 
     /**
@@ -24,8 +26,17 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.categories.create');
     }
+
+    public function createSubCate($id)
+    {
+        $category = Category::where('id', $id)->first();
+        $subCategory = Category::find($id)->get();
+       return view('backend.categories.create-sub', compact('subCategory', 'category'));
+    }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +46,22 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = [
+            'name' => $request->name,
+            'parent_id' => 0
+        ];
+        Category::create($data);
+        return redirect()->route('categories.index');
+    }
+
+    public function storeSubCate(Request $request, $id)
+    {
+        $data = [
+            'name' => $request->name,
+            'parent_id' => $id
+        ];
+        Category::create($data);
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -45,8 +71,9 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   $category = Category::where('id', $id)->first();
+        $subCategories = Category::orderBy('id', 'desc ')->where('parent_id', $id)->paginate(5);;
+        return view('backend.categories.show', compact('subCategories', 'category'));
     }
 
     /**
@@ -57,7 +84,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+        return view('backend.categories.edit', compact('category'));
     }
 
     /**
@@ -69,7 +97,10 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $category = Category::find($id);
+        $category->update($data);
+        return redirect()->route('categories.index');
     }
 
     /**
