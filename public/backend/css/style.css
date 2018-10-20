@@ -55,3 +55,9 @@
     border-bottom-right-radius: 3px;
     border-top-right-radius: 3px
 }
+
+
+th,
+td {
+    text-align: center;
+}

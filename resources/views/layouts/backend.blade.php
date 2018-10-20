@@ -19,6 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="{{ url('backend/css/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('dist/sweetalert2.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('backend/css/style.css') }}">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -93,7 +94,7 @@
         <li><a class="app-menu__item active" href="{{ route('admin.dashboard') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-address-book"></i><span class="app-menu__label">Quản lý quản trị viên</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i>Danh sách</a></li>
+            <li><a class="treeview-item" href="{{ route('users.index') }}"><i class="icon fa fa-circle-o"></i>Danh sách</a></li>
           </ul>
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Quản lý danh mục</span><i class="treeview-indicator fa fa-angle-right"></i></a>
@@ -108,7 +109,7 @@
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Quản lý khách hàng</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i>Danh sách</a></li>
+            <li><a class="treeview-item" href="{{ route('customers.index') }}"><i class="icon fa fa-circle-o"></i>Danh sách</a></li>
           </ul>
         </li>
           <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-cart-plus"></i><span class="app-menu__label">Quản lý đơn đặt hàng</span><i class="treeview-indicator fa fa-angle-right"></i></a>
@@ -118,7 +119,7 @@
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-comments-o"></i><span class="app-menu__label">Quản lý bình luận</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i>Danh sách</a></li>
+            <li><a class="treeview-item" href="{{ route('comments.index') }}"><i class="icon fa fa-circle-o"></i>Danh sách</a></li>
           </ul>
         </li>
       </ul>
@@ -135,5 +136,9 @@
     <script src="{{  url('backend/js/plugins/pace.min.js')}} "></script>
     <!-- Page specific javascripts-->
     <script type="text/javascript" src="{{  url('backend/js/plugins/chart.js')}} "></script>
+    <script type="text/javascript" src="{{  url('dist/sweetalert2.min.js')}} "></script>
+    <script type="text/javascript" src="{{ url('backend/js/plugins/bootstrap-notify.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url('backend/js/plugins/sweetalert.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url('backend/js/style.js') }}"></script>
   </body>
 </html>

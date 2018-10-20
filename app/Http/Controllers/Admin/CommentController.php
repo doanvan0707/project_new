@@ -4,82 +4,56 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use App\Comment;
 
 class CommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $comments = Comment::orderBy('id', 'desc')->paginate(3);
+        return view('backend.comments.index', compact('comments'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function approve($id)
     {
-        //
-    }
+        DB::table('comments')
+            ->where("comments.id", '=',  $id)
+            // dd(DB::table('comments')
+            // ->where("comments.id", '=',  $id)->first());
+            ->update(['comments.active'=> 1]);
+        return redirect()->route('comments.index');
+    }   
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function remove($id)
     {
-        //
-    }
+        DB::table('comments')
+            ->where("comments.id", '=',  $id)
+            // dd(DB::table('comments')
+            // ->where("comments.id", '=',  $id)->first());
+            ->update(['comments.active'=> 2]);
+        return redirect()->route('comments.index');
+    }   
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $comment = Comment::find($id);
+        return view('backend.comments.detail', compact('comment'));
+    }   
+
+
+    public function create(Request $request)
+    {
+        $data = $request->all();
+        Comment::create($data);
+        $request->session()->flash('status', 'Bình luận thành công!');
+        return back();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function search(Request $request)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+        $search = $request->search;
+        $comments = Comment::where('name', 'LIKE', "%$search%")->orderBy('id', 'desc')->paginate(3);
+        return view('backend.comments.search', compact('comments'));
+    }    
 }
