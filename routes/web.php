@@ -28,6 +28,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
 	Route::post('/categories/{id}/create-sub-cate/', 'CategoryController@storeSubCate')->name('categories.store-sub-cate');
 	Route::resource('/products', 'ProductController');
 	Route::resource('/users', 'UserController');
+	Route::resource('/tests', 'TestController');
 	Route::group(['prefix' => 'comments', 'as' => 'comments.'], function(){
 		Route::get('/', 'CommentController@index')->name('index');
 		Route::get('/approve/{id}', 'CommentController@approve')->name('approve');
