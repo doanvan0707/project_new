@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\Category;
 
 class ProductController extends Controller
 {
@@ -26,7 +27,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('backend.products.create');
+        $categories = Category::where('parent_id', '0')->get();
+        return view('backend.products.create', compact('categories'));
     }
 
     /**
@@ -37,7 +39,19 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $file = $request->image;
+        $file->move('images', $file->getClientOriginalName());
+        $data = [
+            'name' => $request->name,
+            'category_id' => $request->category_id,
+            'description' => $request->description,
+            'unit_price' => $request->unit_price,
+            'promotion_price' => $request->promotion_price,
+            'image' => $file->getClientOriginalName(),
+            'size' => $request->size
+        ];
+        Product::create($data);
+        return redirect()->route('products.index');
     }
 
     /**

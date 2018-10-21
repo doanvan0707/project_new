@@ -36,7 +36,7 @@
 			<tbody>
 				<tr>
 					<td>{{ ++$key }}</td>
-          <td><img src="{{ url('images/Basic-ST44.jpg') }}" alt="katy" width="70px" height="100px"></td>
+        <td><img src="{{url('images/')}}/{{$product->image}}" alt="katy" width="70px" height="100px"></td>
           <td>{{ $product->name }}</td>
           <td>{{ $product->category->name }}</td>
           <td>{!!number_format($product->unit_price,0,",",".") . 'đ'!!}</td>
