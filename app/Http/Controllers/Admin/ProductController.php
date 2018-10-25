@@ -27,7 +27,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = Category::where('parent_id', '0')->get();
+        $categories = Category::where('parent_id', '<>','0')->get();
         return view('backend.products.create', compact('categories'));
     }
 

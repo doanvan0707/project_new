@@ -1,0 +1,27 @@
+h2.boxed-content-title {
+    font-size: 14px;
+}
+
+.top-header {
+    background-color: #1F1F1F;
+}
+
+.bg-light {
+	background-color: #171717 !important;
+}
+
+.navbar-light .navbar-brand {
+    color: #fff !important;
+}
+
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+    color: #fff !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #fff !important;
+}
+
+.boxed-content.left-aligned {
+    color: #fff;
+}

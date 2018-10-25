@@ -13,7 +13,7 @@
 		<tbody>
 			<tr>
 				<td>{{ ++$key }}</td>
-				<td>{{ $user->username }}</td>
+				<td>{{ $user->name }}</td>
 				<td>{{ $user->email }}</td>
 				<td>{{ $user->role->name }}</td>
 				<td class="hidden-sm hidden-xs btn-group">

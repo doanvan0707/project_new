@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.frontend');
-});
+Route::get('/', 'FrontendController@index')->name('home.index');
 
 Auth::routes();
 
